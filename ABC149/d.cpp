@@ -19,24 +19,24 @@ int main() {
   int ans = 0;
   rep(i, k) {
     vector<int> x;
+    // 1: rrr
+    // 2: sp
     for (int j = i; j < n; j += k) {
       x.push_back(ctoi[s[j]]);
     }
-  }
-  rep(i, n) {
-    
-    bool skip = true;
-    cout << "i: " <<  i << endl;
-    if (s.length() > (max(i - 2, 0))) {
-      if (s[i] != s[i - 2]) {
-        ans += a[ctoi[s[i]]];
-      } else if (skip) {
-        skip = false;
-        ans += a[ctoi[s[i]]];
+    // 1: 222
+    // 2: 01
+    var prev = -1;
+    for (var nx : x) {
+      if (prev == nx) {
+        ans += 0;
+        // cout << "[" << ans << "]" << endl;
+        prev = -1;
       } else {
-        skip = true;
+        ans += a[nx];
+        // cout << "[" << ans << "]" << endl;
+        prev = nx;
       }
-      cout << "ans: " <<  ans << endl;
     }
   }
   cout << ans << endl;
