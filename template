@@ -8,9 +8,9 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const ll INF = 1LL << 60;
 ll dp[100010];
-// 最小化問題なので INF で埋める
-rep(i,100010) dp[i] = INF;
 
 int main() {
-  cout << "Hello world!" << endl;
+  // 最小化問題なので INF で埋める
+  rep(i,100010) dp[i] = INF;
+  cout << dp[n-1] << endl;
 }
