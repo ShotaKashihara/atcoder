@@ -7,40 +7,33 @@ using P = pair<int, int>;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const ll INF = 1LL << 60;
-
+ll dp[1000][100010] = {0};
 
 int main() {
   int n, w;
   cin >> n >> w;
-  ll w[n];
-  ll v[n];
+  ll weight[n];
+  ll value[n];
   rep(i,n) {
-    cin >> w[i] >> v[i];
+    cin >> weight[i] >> value[i];
   }
-
-  ll dp[110][100010] = {0};
-
-  // 
-  // dp[i] 価値の総和の最大値
 
   // N個の品物の数ループ
   rep(i,n) {
-    // 重さの和が 0->w になるようにループ
-    for (var sum_w = 0; sum_w <= w; ++sum_w) {
+    // 重さが 0->w になるまで 1+w 回ループ
+    rep(limit, 1+w) {
 
-      // i番目の品物を選ぶ場合
-      // → sum_w - w[i] の価値に v[i] を加算
-      if (sum_w - w[i] >= 0) {
-        chmax(dp[i+1][sum_w], dp[i][sum_w - w[i]] + v[i]);
+      // 品物iの重さが上限より小さいか？
+      // :eyes: 0-1 ナップザックなので、置けるか置かないかだけ見ている
+      if (limit - weight[i] >= 0) {
+        // 上で代入した、選ばない場合と選ぶ場合の最大を取る
+        chmax(dp[i+1][limit], value[i] + dp[i][limit - weight[i]]);
       }
-
-      // i番目の品物を選ばない場合
-      // → いま(dp[i])と全く同じなのでコピー
-      chmax(dp[i+1][sum_w], dp[i][sum_w]);
+      // 品物iを選ばない場合
+      // そのままコピー
+      chmax(dp[i+1][limit], dp[i][limit]);
     }
   }  
 
-
-
-  cout << dp[n-1] << endl;
+  cout << dp[n][w] << endl;
 }
