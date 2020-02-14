@@ -7,8 +7,8 @@ using P = pair<int, int>;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const ll INF = 1LL << 60;
-const int MAX_ITEM = 100;
-const int MAX_VALUE = 100000;
+const int MAX_ITEM = 110;
+const int MAX_VALUE = 100100;
 ll dp[MAX_ITEM][MAX_VALUE]; // 重さ
 
 int main() {
@@ -21,10 +21,13 @@ int main() {
     cin >> weight[i] >> value[i];
   }
 
-  // 最小化問題なので初期化
+  // 最小化問題なのでINF埋め
   rep(i,MAX_ITEM) {
     rep(j,MAX_VALUE) dp[i][j] = INF;
   }
+
+  // 初期値00だけ0にする
+  dp[0][0] = 0;
   
   // N個の品物の数ループ
   rep(i,n) {
