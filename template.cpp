@@ -12,5 +12,7 @@ ll dp[100010];
 int main() {
   // 最小化問題なので INF で埋める
   rep(i,100010) dp[i] = INF;
+  dp[0] = 0;
+  
   cout << dp[n-1] << endl;
 }
