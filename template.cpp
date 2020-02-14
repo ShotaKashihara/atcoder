@@ -7,7 +7,9 @@ using P = pair<int, int>;
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
 const ll INF = 1LL << 60;
-ll dp[1000][100010] = {0};
+const int MAX_ITEM = 110;
+const int MAX_VALUE = 100100;
+ll dp[MAX_ITEM][MAX_VALUE] = {0};
 
 int main() {
   // 最小化問題なので INF で埋める
