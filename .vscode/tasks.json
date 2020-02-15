@@ -8,13 +8,17 @@
             "type": "shell",
             "command": "g++",
             "args": [
+                "-DDEBUG",
                 "-std=c++14",
                 "-g",
                 "${file}",
                 "-o",
                 "${workspaceFolder}/main.out"
             ],
-            "group": "build"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
