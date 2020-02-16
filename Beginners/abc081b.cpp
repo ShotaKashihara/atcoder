@@ -4,8 +4,6 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-// sort(A.begin(), A.end(), cmp)
-bool cmp(P a, P b) { return a.second < b.second; }
 #ifdef DEBUG
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
@@ -18,28 +16,30 @@ const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 
 int main() {
-  int n,k;
-  cin >> n >> k;
-  int h[n];
-  rep(i,n) cin >> h[i];
+  int n; cin >> n;
+  int a[n];
+  rep(i,n) cin >> a[i];
 
-  // 最小化問題なので INF or 0 で埋める
-  rep(i,MAX_ITEM) {
-    dp[i] = INF;
-  }
-   
-  // 初期値は 0 or INF
-  dp[0] = 0;
+  int res = 0;
+  while (true) {
+    // すべて偶数
+    bool allEven = true;
+    rep(i,n) {
+      if (a[i] % 2 == 1) {
+        allEven = false;
+        break;
+      }
+    }
 
-  // 足場だけ回す
-  rep(i,n-1) {
-    // 足場i+j の値は 足場iのコストに abs(h[i] - h[i+j]) を足した数
-    rep(j,k+1) {
-      if (j == 0) continue;
-      chmin(dp[i+j], dp[i] + abs(h[i+j] - h[i]));
+    if (allEven) {
+      res++;
+      rep(i,n) {
+        a[i] = a[i] / 2;
+      }
+    } else {
+      break;
     }
   }
-  
-  cout << dp[n-1] << endl;
+  cout << res << endl;
   return 0;
 }

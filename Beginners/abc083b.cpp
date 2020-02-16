@@ -4,8 +4,6 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-// sort(A.begin(), A.end(), cmp)
-bool cmp(P a, P b) { return a.second < b.second; }
 #ifdef DEBUG
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
@@ -17,29 +15,26 @@ const ll INF = 1LL << 60;
 const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 
-int main() {
-  int n,k;
-  cin >> n >> k;
-  int h[n];
-  rep(i,n) cin >> h[i];
+// 12345,0 -> 1234,5 -> 123,9 -> 12,12 -> 1,14
 
-  // 最小化問題なので INF or 0 で埋める
-  rep(i,MAX_ITEM) {
-    dp[i] = INF;
+int digit_sum(int n, int sum) {
+  if (n < 10) {
+    return sum + n;
   }
-   
-  // 初期値は 0 or INF
-  dp[0] = 0;
+  return digit_sum(n / 10, sum + n % 10);
+}
 
-  // 足場だけ回す
-  rep(i,n-1) {
-    // 足場i+j の値は 足場iのコストに abs(h[i] - h[i+j]) を足した数
-    rep(j,k+1) {
-      if (j == 0) continue;
-      chmin(dp[i+j], dp[i] + abs(h[i+j] - h[i]));
+int main() {
+  int n,a,b; cin >> n >> a >> b;
+
+  int res = 0;
+  rep(i,n+1) {
+    var sum = digit_sum(i,0);
+    if (a <= sum && sum <= b) {
+      res += i;
     }
   }
-  
-  cout << dp[n-1] << endl;
+
+  cout << res << endl;
   return 0;
 }

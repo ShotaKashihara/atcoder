@@ -4,8 +4,6 @@
 using namespace std;
 using ll = long long;
 using P = pair<int, int>;
-// sort(A.begin(), A.end(), cmp)
-bool cmp(P a, P b) { return a.second < b.second; }
 #ifdef DEBUG
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
@@ -18,28 +16,23 @@ const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 
 int main() {
-  int n,k;
-  cin >> n >> k;
-  int h[n];
-  rep(i,n) cin >> h[i];
-
-  // 最小化問題なので INF or 0 で埋める
-  rep(i,MAX_ITEM) {
-    dp[i] = INF;
+  int n; cin >> n;
+  vector<int> d; rep(i,n) {
+    int dd; cin >> dd;
+    d.push_back(dd);
   }
-   
-  // 初期値は 0 or INF
-  dp[0] = 0;
 
-  // 足場だけ回す
-  rep(i,n-1) {
-    // 足場i+j の値は 足場iのコストに abs(h[i] - h[i+j]) を足した数
-    rep(j,k+1) {
-      if (j == 0) continue;
-      chmin(dp[i+j], dp[i] + abs(h[i+j] - h[i]));
+  sort(d.rbegin(), d.rend());
+
+  int res = 0;
+  ll last = INF;
+  for (auto &dd: d) {
+    if (last > dd) {
+      res += 1;
+      last = dd;
     }
   }
-  
-  cout << dp[n-1] << endl;
+
+  cout << res << endl;
   return 0;
 }
