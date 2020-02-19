@@ -12,12 +12,8 @@ int main() {
   vector<int> a(n);
   rep(i, n) cin >> a[i];
   vector<int> aa(n*n);
-  rep(i, n) {
-    // cout << "i: " << i << endl;
-    rep(j, n) {
-      // cout << "j: " << i << endl;
-      aa[i*n + j] = a[i] + a[j];
-    }
+  rep(i, n)rep(j, n) {
+      aa.push_back(a[i] + a[j]);
   }
   sort(aa.rbegin(), aa.rend());
   ll ans = 0;
