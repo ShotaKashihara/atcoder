@@ -80,30 +80,24 @@ int main() {
 
 ## 二分探索 (binary_search)
 
+[ARC037 C - 億マス計算](arc037/c.cpp)
+
 ```
 vector<int> a = { 1,2,3,4,5,6,7,7,8,9 };
 
-bool isOK(int index, int key) {
-  if (a[index] >= key) return true;
-  else return false;
-}
-
-int binary_search(int key) {
+int main() {
+  int key = 7;
   int ng = -1; // 左端の初期値
   int ok = a.size(); // 右端の初期値
 
   // 左端と右端の差が1になるまで。
   while (abs(ok - ng) > 1) {
     var mid = (ok - ng) / 2;
-    if (isOK(mid, key)) ok = mid;
+    if (a[mid] >= key) ok = mid;
     else ng = mid;
   }
 
-  return ok; // key に近い最小の値を返す
-}
-
-int main() {
-  cout << binary_search(7) << endl; // 7
+  cout << ok << endl;
 }
 ```
 
