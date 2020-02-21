@@ -5,7 +5,7 @@ using namespace std;
 vector<int> a = {1, 14, 32, 51, 51, 51, 243, 419, 750, 910};
 
 int main() {
-  int target = 51;
+  int target = 243;
 
   sort(all(a));
   auto l_i = lower_bound(all(a), target);
@@ -22,8 +22,8 @@ int main() {
 
   cout << "(lower_bound)target未満の個数:" << l_i - a.begin() << endl;
   cout << "(lower_bound)target以上の個数:" << a.end() - l_i << endl;
-  cout << "(upper_bound)target以下の個数:" << a.end() - u_i << endl;
-  cout << "(upper_bound)targetより大きい個数:" << u_i - a.begin() << endl;
+  cout << "(upper_bound)target以下の個数:" << u_i - a.begin() << endl;
+  cout << "(upper_bound)targetより大きい個数:" << a.end() - u_i << endl;
 
   cout << "(upper - lower)targetと同値の個数:" << u_i - l_i << endl;
 }

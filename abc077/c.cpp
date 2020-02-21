@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define rep(i,a,b) for(int i=a;i<b;i++)
 #define rrep(i,a,b) for(int i=a;i>=b;i--)
+#define all(a) (a).begin(),(a).end()
 #define var auto
 using namespace std;
 using ll = long long;
@@ -13,9 +14,9 @@ int main() {
   rep(i,0,n) cin >> b[i];
   rep(i,0,n) cin >> c[i];
 
-  sort(a.begin(), a.end());
-  sort(b.begin(), b.end());
-  sort(c.begin(), c.end());
+  sort(all(a));
+  sort(all(b));
+  sort(all(c));
 
   // 祭壇を満たす条件: a < b < c 
   // 上を満たす個数を求めたい。
@@ -26,15 +27,15 @@ int main() {
 
   rep(i,0,n) {
     // a < b の個数
-    var a_b_itr = lower_bound(a.begin(), a.end(), b[i]);
-    ll a_b_count = a_b_itr - a.begin();
+    var l_i = lower_bound(all(a), b[i]);
+    ll l_c = l_i - a.begin();
 
     // b < c の個数
-    var b_c_itr = upper_bound(c.begin(), c.end(), b[i]);
-    ll b_c_count = c.begin() - b_c_itr;
+    var u_i = upper_bound(all(c), b[i]);
+    ll u_c = c.end() - u_i;
 
-    ans += a_b_count * b_c_count;
+    ans += l_c * u_c;
   }
-  cout << ans;
+  cout << ans << endl;
   return 0;
 }
