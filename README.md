@@ -77,6 +77,35 @@ int main() {
 }
 ```
 
+## 二分探索 (binary_search)
+
+```
+vector<int> a = { 1,2,3,4,5,6,7,7,8,9 };
+
+bool isOK(int index, int key) {
+  if (a[index] >= key) return true;
+  else return false;
+}
+
+int binary_search(int key) {
+  int ng = -1; // 左端の初期値
+  int ok = a.size(); // 右端の初期値
+
+  // 左端と右端の差が1になるまで。
+  while (abs(ok - ng) > 1) {
+    var mid = (ok - ng) / 2;
+    if (isOK(mid, key)) ok = mid;
+    else ng = mid;
+  }
+
+  return ok; // key に近い最小の値を返す
+}
+
+int main() {
+  cout << binary_search(7) << endl; // 7
+}
+```
+
 ## DP
 
 template
@@ -95,3 +124,4 @@ const ll INF = 1LL << 60;
 const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 ```
+
