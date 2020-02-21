@@ -1,41 +1,37 @@
-#include <bits/stdc++.h>
-#define rep(i,n) for (int i = 0; i < (n); ++i)
-#define var auto
+#include <iostream>
+#include <vector>
 using namespace std;
-using ll = long long;
-using P = pair<int, int>;
-// sort(A.begin(), A.end(), cmp)
-bool cmp(P a, P b) { return a.second < b.second; }
-#ifdef DEBUG
-template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
-template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; cout << a << endl; return 1; } cout << a << endl; return 0; }
-#else
-template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }
-template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }
-#endif
-const ll INF = 1LL << 60;
-const int MAX_ITEM = 10e4+10; // 10^5
-ll dp[MAX_ITEM] = {0};
+
+vector<int> a = {1, 14, 32, 51, 51, 51, 243, 419, 750, 910};
+
+// index が条件を満たすかどうか
+bool isOK(int index, int key) {
+    if (a[index] >= key) return true;
+    else return false;
+}
+
+// 汎用的な二分探索のテンプレ
+int binary_search(int key) {
+
+  int ng = 20; // 初期値の左端
+  int ok = 36; // 初期値の右端
+
+  // 両端にある、leftとrightの差が 1 になるまでループする
+
+  while (abs(ok - ng) > 1) {
+    int mid = (ok + ng) / 2;
+
+    if (isOK(mid, key)) ok = mid; // isOK を満たしていたら、mid は ok
+    else ng = mid; // isOK を満たしていなければ、mid は ng
+  }
+}
 
 int main() {
-  
-  vector<int> v = { 10,20,30,40,50 };
-  array<int, 5> a = { 10, 20, 30, 40, 50};
-  // cout << all_of(arr.begin(), arr.end(), [](int i) {
-  //   return i % 2 == 0;
-  // }) << endl;
+    cout << binary_search(51) << endl; // a[3] = 51 (さっきは 4 を返したが今回は「最小の index」なので 3)
+    cout << binary_search(1) << endl; // a[0] = 1
+    cout << binary_search(910) << endl; // a[9] = 910
 
-  // for_each(arr.begin(), arr.end(), [](int i) {
-  //   cout << i << endl;
-  // }); 
-
-  
-  // var f = find(arr.begin(), arr.end(), 1);
-
-  // sort(a.rbegin(), a.rend());
-  for_each(a.begin(), a.end(), [](int aa) {
-    cout << aa << endl;
-  });
-
-  return 0;
+    cout << binary_search(52) << endl; // 6
+    cout << binary_search(0) << endl; // 0
+    cout << binary_search(911) << endl; // 10 (場外)
 }
