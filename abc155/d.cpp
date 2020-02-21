@@ -17,52 +17,30 @@ const ll INF = 1LL << 60;
 const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 
+ll p[MAX_ITEM];
+ll m[MAX_ITEM];
+
 int main() {
-  int n;
-  ll k;
+  int n,k;
   cin >> n >> k;
-  vector<ll> a;
+  
   rep(i,n) {
-    ll aa; cin >> aa;
-    a.push_back(aa);
+    ll c; cin >> c;
+    if (c > 0) {
+      
+    }
   }
 
+  // 一周目
+  // a[0] * [1] [2] [3]
+  // a[1] * [2] [3]
+  // a[2] * [3]
 
-  // ペア
-  
+  // 間に合わない!!!
 
-
-
-
-
-
-
+  // 正x負 負x正 が最小
 
 
 
-
-  // int n,k;
-  // cin >> n >> k;
-  // int h[n];
-  // rep(i,n) cin >> h[i];
-
-  // // 最小化問題なので INF or 0 で埋める
-  // rep(i,MAX_ITEM) {
-  //   dp[i] = INF;
-  // }
-   
-  // // 初期値は 0 or INF
-  // dp[0] = 0;
-
-  // // 足場だけ回す
-  // rep(i,n-1) {
-  //   // 足場i+j の値は 足場iのコストに abs(h[i] - h[i+j]) を足した数
-  //   rep(j,k+1) {
-  //     if (j == 0) continue;
-  //     chmin(dp[i+j], dp[i] + abs(h[i+j] - h[i]));
-  //   }
-  // }
-  
-  // cout << dp[n-1] << endl;
   return 0;
 }
