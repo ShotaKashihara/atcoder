@@ -5,9 +5,10 @@
 #define all(a) (a).begin(),(a).end()
 using namespace std;
 using ll = long long;
+const ll INF = 1LL << 60;
 
 int main() {
-  int n,k;
+  int n, k;
   cin >> n >> k;
   vector<ll> a(n), b(n);
   rep(i,0,n) cin >> a[i];
@@ -16,19 +17,38 @@ int main() {
   sort(all(a));
   sort(all(b));
 
-  // a[i] * b[i] を並べたものを ab[] として、k番目を求める
-  // 小さい方から K番目の値が X である
-  // 言い換えると、「X-1以下の数は K個未満かつ、X以下の数はK個以上ある」
-  // 1,1,2,2,2,2,2,4,4
-  // 小さい方から 7番目は 2
-  // 1以下の数は 2個 < 7個
-  // 2以下の数は 7個
+  // あるXを 1~10^18 の範囲で二分探索したい。
+  // 条件
+  // 小さい方から 3番目の値は 10 となる
+  // 小さい方から K番目の値は X となる
+  // →→ X以下の個数はK個以上である
 
-  // 更に言い換えて、「X以下の数が K個以上あるような最小のX」が小さい方からK番目の数
-  // Xを固定して、「X以下の数はK個以上あるか？」をisOK() にして二分探索
+  // ある値 X を取ったときに満たす条件
+  // X >= a_i * b_j
+  // 変形して
+  // b_j <= X/a_i
+  // K を求めたいので、この式を満たす個数を数える
+  // var count = upper_bound(all(b), x / a[i]);
+  // if sum(count) ok = mid;
+  // else ng = mid;
 
-  
 
+  ll ng = 1;
+  ll ok = INF;
 
+  while (abs(ok - ng) > 1) {
+    ll mid = (ok + ng) / 2;
+    ll sum = 0;
+
+    rep(i,0,n) {
+      ll count = upper_bound(all(b), mid / a[i]) - b.begin();
+      sum += count;
+    }
+
+    if (sum >= k) ok = mid;
+    else ng = mid;
+  }
+
+  cout << ok << endl;
   return 0;
 }

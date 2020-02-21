@@ -3,6 +3,7 @@
 ## Algorithm
 - 二分探索
   - ABC077 C
+  - ARC037 C
 - 桁DP
   - ABC155 E
 
