@@ -1,29 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define all(a) (a).begin(),(a).end()
-#define rep(i,a,b) for(int i=a;i<b;i++)
-vector<int> a = {1, 14, 32, 51, 51, 51, 243, 419, 750, 910};
+#define rep(i,a,n) for(int i=a;i<(a+n);i++)
+using ll = long long;
+
+
+ll pom(ll a,ll n,int m){ll x=1;for(a%=m;n;n/=2)n&1?x=x*a%m:0,a=a*a%m;return x;}
+ll pow(ll x, ll n, ll mod) {
+  ll ans = 1;
+  while(n != 0){
+      if(n&1) ans = ans*x % mod;
+      x = x*x % mod;
+      n = n >> 1;
+  }
+  return ans;
+}
+
+// nが大きくて、kが小さい場合の comb(n,k) ※計算量 O(k) 
+// comb(n,k)  = (n*(n-1)*...*(n-k+1)) / k!
+
+int factorial(int n, int mod) {
+  return (n == 1) ? 1 : n * factorial(n - 1, mod) % mod;
+}
+
+ll comb(int n, int k, int mod) {
+  ll res = 1;
+  rep(i, n-k+1, k) {
+    res *= i;
+    res %= mod;
+  }
+  res *= pow(factorial(k, mod), mod-2, mod);
+  res %= mod;
+  return res;
+}
+
+ll pom(ll a,ll n,int m){ll x=1;for(a%=m;n;n/=2)n&1?x=x*a%m:0,a=a*a%m;return x;}
+#define invp(a,p)pom(a,p-2,p)
+rep(i,1,a+1) {
+  temp = temp*(n+1-i)%MOD*invp(i,MOD)%MOD;
+}
 
 int main() {
-  int target = 243;
+  int mod = 1000000007;
 
-  sort(all(a));
-  auto l_i = lower_bound(all(a), target);
-  auto u_i = upper_bound(all(a), target);
+  // cout << comb(4, 2, mod) << endl;
+  // cout << comb(4, 3, mod) << endl;
+  // cout << comb(4, 4, mod) << endl;
 
-  cout << "target: " << target << endl;
-  cout << "array.size(): " << a.size() << endl;
-  cout << "array: ";
-  rep(i,0,a.size()) cout << a[i] << ",";
-  cout << endl;
-  
-  cout << "(*lower_bound)target以上の最初の値: " << *l_i << endl;
-  cout << "(*upper_bound)targetより大きいの最初の値: " << *u_i << endl;
-
-  cout << "(lower_bound)target未満の個数:" << l_i - a.begin() << endl;
-  cout << "(lower_bound)target以上の個数:" << a.end() - l_i << endl;
-  cout << "(upper_bound)target以下の個数:" << u_i - a.begin() << endl;
-  cout << "(upper_bound)targetより大きい個数:" << a.end() - u_i << endl;
-
-  cout << "(upper - lower)targetと同値の個数:" << u_i - l_i << endl;
+  ll w = pow(2, 1000000000, mod) - 1;
+  ll a = comb(1000000000, 141421, mod);
+  ll b = comb(1000000000, 173205, mod);
+  cout << w - a - b << endl;
 }
+
+// 140625000
+// 516595147
+// 589953354

@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
-#define rep(i,a,b) for(int i=a;i<b;i++)
-#define rrep(i,a,b) for(int i=a;i>=b;i--)
+#define rep(i,a,n) for(int i=a;i<(a+n);i++)
 #define var auto
 using namespace std;
 using ll = long long;

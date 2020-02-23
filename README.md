@@ -43,7 +43,7 @@ sort(all(A), [](int a1, int a2) {
 #include <bits/stdc++.h>
 using namespace std;
 #define all(a) (a).begin(),(a).end()
-#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rep(i,a,n) for(int i=a;i<(a+n);i++)
 vector<int> a = {1, 14, 32, 51, 51, 51, 243, 419, 750, 910};
 
 int main() {
@@ -120,3 +120,81 @@ const int MAX_ITEM = 10e4+10; // 10^5
 ll dp[MAX_ITEM] = {0};
 ```
 
+## 組み合わせ
+
+- n種類からk種類を取る組み合わせは comb(n,k)
+- n種類で作る全ての組み合わせの和は 2^n
+  - n が 10^9 とかの場合、O(N) だと TLE するので 「繰り返し二乗法」を使う。
+
+### 階乗の計算
+n! とかで使う
+```c++
+int factorial(int n) {
+  return (n == 1) ? 1 : n * factorial(n - 1);
+}
+factorial(5) // 5! = 120
+```
+
+### Combination
+```c++
+vector<ll> fac(300001); //n!(mod M)
+vector<ll> ifac(300001); //k!^{M-2} (mod M)
+
+// comb(n,k) を使う前に、n! と k!^{mod-2} を準備しておく。
+// 制約: 0 < n,k < 300001
+void comb_init(int mod) { 
+  fac[0] = 1;
+  ifac[0] = 1;
+  rep(i, 0, 300000) {
+    fac[i+1] = fac[i] * (i+1) % mod;
+    ifac[i+1] = ifac[i] * pow(i+1, mod-2, mod) % mod;
+  }
+}
+// フェルマーの小定理を応用して Combination 計算を行う
+// comb(n,k) = n! * k!^{M-2} * (n-k)!^{M-2} 
+int comb(int n, int k, int mod) {
+  if (n == 0 && k == 0) return 1;
+  if (n < k || n < 0) return 0;
+  // comb(n,k) = n! * k!^{M-2} * (n-k)!^{M-2} 
+  return (fac[n] * ifac[k] % mod) * ifac[n-k] % mod;
+}
+
+int mod = 1000000007;
+comb_init(mod);
+comb(4, 2, mod); // 6
+```
+
+### 二項係数の和
+n種類で作る全ての組み合わせの和は 2^n となる
+例えば n=4 のとき、
+```
+//c(4,0) + c(4,1) + c(4,2) + c(4,3) + c(4,4)
+//= 1+4+6+4+1
+//= 2^4
+
+pow(2, 4);
+```
+
+### 繰り返し二乗法
+
+- 2^n mod 10^9+7 などを計算するとき、nが巨大で計算量が大きくなる場合に有効
+- 考え方としては、2^10 を (2^2)^5 とするように乗数を 2 で割って再帰的に計算をしてく
+- 例: 2^1000000000 mod 1000000007 
+- → (((((((2^2)^2)^2)^2)^2)^2)^2)^2)^2)^2 ...
+
+```c++
+int pow(ll x, ll n, ll mod) {
+  ll ans = 1;
+  while(n != 0){
+      if(n&1) ans = ans*x % mod;
+      x = x*x % mod;
+      n = n >> 1;
+  }
+  return ans;
+}
+pow(2, 1000000000, 1000000007); // 2^(10^9) mod 10^9+7
+```
+
+```c++
+ll pom(ll a,ll n,int m){ll x=1;for(a%=m;n;n/=2)n&1?x=x*a%m:0,a=a*a%m;return x;}
+```
