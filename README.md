@@ -135,14 +135,41 @@ int factorial(int n) {
 factorial(5) // 5! = 120
 ```
 
-### Combination
+### 順列 permutation
+NaN
+
+### 組み合わせ Combination
+- 組み合わせの個数 nCr を求める
+
+nCr = n*(n-1)*...*(n-r+1) / 1*2*...*r
+
+nCr mod M = n*(n-1)*...*(n-r+1) mod M * pow(r, mod-2) mod M
+
+```c++
+ll nCr(int n, int r, int mod) {
+  ll res = 1;
+  for(int i = 1; i <= r; i++) {
+    res = res * (n-i+1) % mod * pow(i, mod-2, mod) % mod;
+  }
+  return res;
+}
+nCr(4, 2, mod); // 6
+```
+
+ただし、この方法の計算量は O(N) で、min(r, n-r) が 10^5 くらいなら間に合うがそれ以上だと間に合わない。
+逆に言えば、n が 10^9 くらいでも min(r, n-r) が十分に小さければ間に合う -> ABC156-D
+
+- nCr を高速に計算する
+
+n が 300001 よりも小さく、 nCr を O(1) で計算したい場合にはこちらがおすすめ。
+
 ```c++
 vector<ll> fac(300001); //n!(mod M)
 vector<ll> ifac(300001); //k!^{M-2} (mod M)
 
 // comb(n,k) を使う前に、n! と k!^{mod-2} を準備しておく。
 // 制約: 0 < n,k < 300001
-void comb_init(int mod) { 
+void nCr_init(int mod) { 
   fac[0] = 1;
   ifac[0] = 1;
   rep(i, 0, 300000) {
@@ -151,8 +178,8 @@ void comb_init(int mod) {
   }
 }
 // フェルマーの小定理を応用して Combination 計算を行う
-// comb(n,k) = n! * k!^{M-2} * (n-k)!^{M-2} 
-int comb(int n, int k, int mod) {
+// nCr(n,k) = n! * k!^{M-2} * (n-k)!^{M-2} 
+int nCr(int n, int k, int mod) {
   if (n == 0 && k == 0) return 1;
   if (n < k || n < 0) return 0;
   // comb(n,k) = n! * k!^{M-2} * (n-k)!^{M-2} 
@@ -160,8 +187,8 @@ int comb(int n, int k, int mod) {
 }
 
 int mod = 1000000007;
-comb_init(mod);
-comb(4, 2, mod); // 6
+nCr_init(mod);
+nCr(4, 2, mod); // 6
 ```
 
 ### 二項係数の和
@@ -193,8 +220,4 @@ int pow(ll x, ll n, ll mod) {
   return ans;
 }
 pow(2, 1000000000, 1000000007); // 2^(10^9) mod 10^9+7
-```
-
-```c++
-ll pom(ll a,ll n,int m){ll x=1;for(a%=m;n;n/=2)n&1?x=x*a%m:0,a=a*a%m;return x;}
 ```
