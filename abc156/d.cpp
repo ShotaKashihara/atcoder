@@ -4,34 +4,84 @@ using namespace std;
 #define rep(i,a,n) for(int i=a;i<(a+n);i++)
 using ll = long long;
 
-ll pow(ll x, ll n, int mod) {
-  ll ans = 1;
-  while(n != 0){
-      if(n&1) ans = ans*x % mod;
-      x = x*x % mod;
-      n = n >> 1;
+// auto mod int
+// https://youtu.be/L8grWxBlIZ4?t=9858
+// https://youtu.be/ERZuLAxZffQ?t=4807 : optimize
+// https://youtu.be/8uowVvQ_-Mo?t=1329 : division
+const int mod = 1000000007;
+struct mint {
+  ll x; // typedef long long ll;
+  mint(ll x=0):x((x%mod+mod)%mod){}
+  mint operator-() const { return mint(-x);}
+  mint& operator+=(const mint a) {
+    if ((x += a.x) >= mod) x -= mod;
+    return *this;
   }
-  return ans;
+  mint& operator-=(const mint a) {
+    if ((x += mod-a.x) >= mod) x -= mod;
+    return *this;
+  }
+  mint& operator*=(const mint a) {
+    (x *= a.x) %= mod;
+    return *this;
+  }
+  mint operator+(const mint a) const {
+    mint res(*this);
+    return res+=a;
+  }
+  mint operator-(const mint a) const {
+    mint res(*this);
+    return res-=a;
+  }
+  mint operator*(const mint a) const {
+    mint res(*this);
+    return res*=a;
+  }
+  mint pow(ll t) const {
+    if (!t) return 1;
+    mint a = pow(t>>1);
+    a *= a;
+    if (t&1) a *= *this;
+    return a;
+  }
+
+  // for prime mod
+  mint inv() const {
+    return pow(mod-2);
+  }
+  mint& operator/=(const mint a) {
+    return (*this) *= a.inv();
+  }
+  mint operator/(const mint a) const {
+    mint res(*this);
+    return res/=a;
+  }
+};
+
+mint pow_(int base, int n) {
+  if (n == 0) return 1;
+  mint x = pow_(base, n/base);
+  x *= x;
+  if (n%base == 1) x *= mint(base);
+  return x;
 }
 
-ll nCr(int n, int r, int mod) {
-  ll res = 1;
-  for(int i = 1; i <= r; i++) {
-    res = res * (n-i+1) % mod * pow(i, mod-2, mod) % mod;
+mint nCr(int n, int r) {
+  mint x = 1, y = 1;
+  rep(i, 0, r) {
+    x *= n-i;
+    y *= i+1;
   }
-  return res;
+  return x / y;
 }
 
 int main() {
-  int mod = 1000000007;
   int n,a,b;
   cin >> n >> a >> b;
-  ll temp = pow(2, n, mod) - 1 - nCr(n, a, mod) - nCr(n, b, mod);
-  // ※  temp が 負mod より小さい場合も考える。(このif文は理解のためにつけているので、実際は if分岐せずに処理しても良い)
-  if (temp < mod) {
-    temp %= mod;
-    temp += mod; 
-  }
-  temp %= mod;
-  cout << temp << endl;
+  mint ans;
+  ans += pow_(2, n);
+  ans -= 1;
+  ans -= nCr(n, a);
+  ans -= nCr(n, b);
+  cout << ans.x << endl;
 }
