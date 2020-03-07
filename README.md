@@ -9,6 +9,19 @@
 
 ## C++
 
+### cin
+N
+A1 A2 ... AN
+```c++
+template<typename T>
+istream& operator >> (istream& is, vector<T>& vec){
+  for(T& x: vec) is >> x;
+  return is;
+}
+vector<int> A(n);
+cin >> A;
+```
+
 ### Vector
 ```c++
 // サイズなし初期化
@@ -146,17 +159,18 @@ nCr = n*(n-1)*...*(n-r+1) / 1*2*...*r
 nCr mod M = n*(n-1)*...*(n-r+1) mod M * pow(r, mod-2) mod M
 
 ```c++
-ll nCr(int n, int r, int mod) {
-  ll res = 1;
-  for(int i = 1; i <= r; i++) {
-    res = res * (n-i+1) % mod * pow(i, mod-2, mod) % mod;
+mint nCr(int n, int r) {
+  mint x = 1, y = 1;
+  rep(i, 0, r) {
+    x *= n-i;
+    y *= i+1;
   }
-  return res;
+  return x / y;
 }
-nCr(4, 2, mod); // 6
+nCr(4, 2); // 6
 ```
 
-ただし、この方法の計算量は O(N) で、min(r, n-r) が 10^5 くらいなら間に合うがそれ以上だと間に合わない。
+この方法の計算量は O(N) なので、min(r, n-r) が 10^5 くらいなら間に合うがそれ以上だと間に合わない。
 逆に言えば、n が 10^9 くらいでも min(r, n-r) が十分に小さければ間に合う -> ABC156-D
 
 - nCr を高速に計算する
@@ -210,14 +224,46 @@ pow(2, 4);
 - → (((((((2^2)^2)^2)^2)^2)^2)^2)^2)^2)^2 ...
 
 ```c++
-int pow(ll x, ll n, ll mod) {
-  ll ans = 1;
-  while(n != 0){
-      if(n&1) ans = ans*x % mod;
-      x = x*x % mod;
-      n = n >> 1;
-  }
-  return ans;
+mint pow_(int base, int n) {
+  if (n == 0) return 1;
+  mint x = pow_(base, n/base);
+  x *= x;
+  if (n%base == 1) x *= mint(base);
+  return x;
 }
-pow(2, 1000000000, 1000000007); // 2^(10^9) mod 10^9+7
+pow(2, 1000000000); // 2^(10^9) mod 10^9+7
+```
+
+## Union-Find
+
+根と根をつないで木にするやつ
+
+```c++
+struct UnionFind {
+  vector<int> par;
+  UnionFind(int N): par(N) { rep(i, 0, N) par[i] = i; }
+  int root(int x) { if (par[x] == x) return x; return par[x] = root(par[x]); }
+  void unite(int x, int y) { int rx = root(x); int ry = root(y); if (rx == ry) return; par[rx] = ry; }
+  bool same(int x, int y) { return root(x) == root(y); }
+};
+
+int main() {
+  // input
+  int n, q;
+  cin >> n >> q;
+  UnionFind uf(n);
+
+  // calculation
+  int p, a, b;
+  rep(i, 0, q) {
+    cin >> p >> a >> b;
+    if (p == 0) {
+      // 連結
+      uf.unite(a,b);
+    } else {
+      // 判定
+      cout << (uf.same(a,b) ? "Yes" : "No") << endl; 
+    }
+  }
+}
 ```
