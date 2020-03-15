@@ -22,16 +22,9 @@ void dfs(string s, char mx) {
 }
 
 int main() {
-  // cin >> n;
-  n = 3;
+  cin >> n;
+  // n = 3;
 
-  // dfs("", 'a');
-
-  string s = "";
-  rep(i,0,'z'-'a'+1) {
-    s += 'a' + i;
-  }
-  cout << s << endl;
-
+  dfs("", 'a');
   return 0;
 }
