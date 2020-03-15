@@ -11,8 +11,7 @@ int main() {
   vector<int> v(n);
   cout << v[n] << endl; // 132033
 
-  // GCC 9.2.0
-  vector<int> v(n);
-  cout << v[n] << endl; // 0
+  // // GCC 9.2.0
+  // vector<int> v(n);
+  // cout << v[n] << endl; // 0
 }
-

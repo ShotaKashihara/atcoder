@@ -2,15 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "lldb Debug",
+            "name": "(LLDB) Debug",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/main.out",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
-            "preLaunchTask": "Build with g++",
-            "osx": {
-                
-            }
+            "cwd": "${fileDirname}/",
+            "preLaunchTask": "clang++ build active file",
         }
     ]
 }

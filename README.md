@@ -22,6 +22,26 @@ vector<int> A(n);
 cin >> A;
 ```
 
+### char
+abcdefghijklmnopqrstuvwxyz
+```c++
+string s = "";
+rep(i, 0, 'z'-'a'+1) {
+  s += 'a' + i;
+}
+cout << s << endl;
+```
+a
+b
+c
+...
+```c++ 
+rep(i, 0, 'z'-'a'+1) {
+  char c = 'a' + i;
+  cout << c << endl;
+}
+```
+
 ### Vector
 ```c++
 // サイズなし初期化

@@ -6,7 +6,8 @@
         "cmath": "cpp",
         "vector": "cpp",
         "iosfwd": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

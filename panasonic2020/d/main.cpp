@@ -1,41 +1,37 @@
 #include <bits/stdc++.h>
-#define rep(i,a,n) for(int i=a;i<(a+n);i++)
+#define rep(i,a,n) for (int i = a; i < (a+n); i++)
 #define var auto
 using namespace std;
 using ll = long long;
 
-// input: "a"
-// output: ["a", "b"]
-char[] ch(char n) {
-  char c = 'a' + n;
-  cout << c << endl;
-}
+int n;
 
-// input: ["a"], 2
-// output: ["aa", "ab"], 1
-// input: ["aa", "ab"], 1
-// output: ["aaa", "aab", "aba", "abb", "abc"], 1
-char hoge(char a[]) {
-  vector<string> aa;
-  for (auto &array : a) {
-    aa.push_back()
+void dfs(string s, char mx) {
+  if (s.length() == n) {
+    cout << s << endl;
+  } else {
+    rep(i, 0, mx - 'a' + 1) {
+      char c = 'a'+i;
+      if (mx == c) {
+        dfs(s+c, mx+1);
+      } else {
+        dfs(s+c, mx);
+      }
+    }
   }
 }
 
 int main() {
-  int n;
-  cin >> n;
+  // cin >> n;
+  n = 3;
 
-  if (n == 1) {
-    cout << "a" << endl;
-  } else if (n == 2) {
-    rep(i, 0, n) {
-      // "a" は確定
-      // 次の文字は 前の文字が "a" なら "a" と "b" を出力する
-      cout << "a" << "a" << endl;
-      cout << "a" << "b" << endl;
-    }
+  // dfs("", 'a');
+
+  string s = "";
+  rep(i,0,'z'-'a'+1) {
+    s += 'a' + i;
   }
+  cout << s << endl;
 
   return 0;
 }
