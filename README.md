@@ -111,6 +111,32 @@ int main() {
 }
 ```
 
+## 累積和
+例: 一列に並んだN個のサイコロから、隣接するK個のサイコロの期待値を求める
+- https://atcoder.jp/contests/abc154/tasks/abc154_d
+
+配列 { 1, 4, 2, 3, 5 }
+累積和 { 1, 5, 7, 10, 15 }
+
+i=2 から i=4 までの総和
+→ 10 - 1 = 9
+
+i=0 から i=3 までの総和
+→ 7 - 0 = 7
+
+```c++
+int n = 5;
+vector<int> p(n);
+rep(i,0,n) cin >> p[i];
+
+// 累積和
+vector<int> s(n+1, 0);
+rep(i,0,n+1) s[i+1] = s[i] + p[i];
+
+// 区間 [left, right] の総和
+cout << s[right] - s[left] << endl;
+```
+
 ## 二分探索 (binary_search)
 
 [ARC037 C - 億マス計算](arc037/c.cpp)

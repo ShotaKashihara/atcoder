@@ -5,5 +5,16 @@ using namespace std;
 using ll = long long;
 
 int main() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i,0,n) cin >> a[i];
+  set<int> s(a.begin(), a.end());
+  if (a.size() == s.size()) {
+    cout << "YES" << endl;
+  } else {
+    cout << "NO" << endl;
+  }
+  
   return 0;
 }

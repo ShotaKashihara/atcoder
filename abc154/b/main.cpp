@@ -5,5 +5,11 @@ using namespace std;
 using ll = long long;
 
 int main() {
+  string s;
+  cin >> s;
+  rep(i,0,s.length()) {
+    s[i] = 'x';
+  }
+  cout << s << endl;
   return 0;
 }

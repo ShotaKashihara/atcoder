@@ -5,11 +5,12 @@ using namespace std;
 using ll = long long;
 
 int main() {
-  string s,t,u;
+  string s,t;
   int a,b;
+  string u;
   cin >> s >> t;
   cin >> a >> b;
-  cin >> u;
+  cin >> u; 
 
   if (u == s) {
     cout << a-1 << " " << b << endl;
