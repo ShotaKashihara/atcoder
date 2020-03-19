@@ -27,27 +27,22 @@ int main() {
     p[i] = P(a,b);
   }
 
-  // cost を 1ずつ増やしていって、damage が HP を超えたら終了
-  // → damage の最大化問題
-  // index: cost
-  // value: damage
+  // 最小化問題なので、INF で埋める
+  rep(i,h+1) dp[i] = INF;
+  // 最初はzero
+  dp[0] = 0;
 
-  int ans = 0;
-  rep(cost, INF) {
-    // ちょうど 合計cost になるような選択肢のうち、damage が最大のものを選ぶ
-    rep(i, n) {
-      int damage = p[i].first;
-      int _cost = p[i].second;
-      if (cost-_cost < 0) continue;
-      chmax(dp[cost], damage + dp[cost-_cost]);
-    }
-
-    if (dp[cost] >= h) {
-      ans = cost;
-      break;
+  // あるHPまでに最小の魔力をDPしていく
+  // dp[<HP>] = <COST> 
+  rep(i,h+1) {
+    // 選択肢の数だけ試す
+    rep(j,n) {
+      int damage = p[j].first;
+      int cost = p[j].second;
+      chmin(dp[ min(h, i+damage) ], dp[i] + cost);
     }
   }
 
-  cout << ans << endl;
+  cout << dp[h] << endl;
   return 0;
 }

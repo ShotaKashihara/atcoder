@@ -46,14 +46,17 @@ rep(i, 0, 'z'-'a'+1) {
 ```c++
 // サイズなし初期化
 vector<int> a;
-rep(i,0,n) {
-    int _a; cin >> _a;
-    a.push_back(_a);
+
+int main() {
+  int N; cin >> N;
+  a.resize(N)
+  rep(i,n) cin >> a[i];
 }
 
 // サイズあり初期化
 vector<int> a(n);
 rep(i,0,n) cin >> a[i];
+
 ```
 
 ```c++
