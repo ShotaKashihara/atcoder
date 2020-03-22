@@ -62,25 +62,48 @@ int main() {
   // 座標順にソートしる
   sort(xh.begin(), xh.end(), [](P p1, P p2) { return p1.first < p2.first; });
 
+  // BIT で処理していく
+  BIT<long long> bit(n+10);
+  // 初期化
+  // [1~2) に HP_0を足す
+  // [2~3] に HP_1を足す... を繰り返す
+  rep(i,n+10+1) bit.add(i+1, i+2, xh[i].second); 
   ll ans = 0;
-  // 左側から爆破
   rep(i, n) {
-    // 最初の 座標とHP
-    int index = xh[i].first;
-    int hp = xh[i].second;
-    if(hp <= 0) {
-      continue;
-    }
+    // [1~2) のHPが 0以下ならスルー
+    ll hp = bit.sum(i+1, i+2);
+    if (hp <= 0) continue;
     // HP をゼロにするのに必要な爆弾の数
-    int bomb = (hp % a == 0) ? hp / a : hp / a + 1;
+    ll bomb = (hp + a - 1) / a;
     ans += bomb;
-    // index から周辺 d にいるやつのHPを削る
-    rep(j, n) {
-      if(xh[j].first - index <= (d * 2)) {
-        xh[j].second -= bomb * a;
-      }
-    }
+    // index から周辺 d にいるやつの HP を削る
+    // 位置i から d*2 だけ右の座標 right を求める
+    ll right = xh[i].first + d * 2;
+    // 位置right の一つ手前までの個数を upper_bound で調べる
+    // int id = upper_bound(xh.begin(), xh.end(), right) - xh.begin();
+    int id = upper_bound(xh.begin(), xh.end(), right, [](ll a1, pair<ll, ll> a2) { return a1 < a2.first; }) - xh.begin();
+    // 位置i から 位置right までにいるやつのHPを削る
+    bit.add(i+1, id+1, -bomb*a);
   }
+
+  // // 左側から爆破
+  // rep(i, n) {
+  //   // 最初の 座標とHP
+  //   int index = xh[i].first;
+  //   int hp = xh[i].second;
+  //   if(hp <= 0) {
+  //     continue;
+  //   }
+  //   // HP をゼロにするのに必要な爆弾の数
+  //   int bomb = (hp % a == 0) ? hp / a : hp / a + 1;
+  //   ans += bomb;
+  //   // index から周辺 d にいるやつのHPを削る
+  //   rep(j, n) {
+  //     if(xh[j].first - index <= (d * 2)) {
+  //       xh[j].second -= bomb * a;
+  //     }
+  //   }
+  // }
 
   cout << ans << endl;
 
