@@ -5,10 +5,15 @@ using namespace std;
 using ll = long long;
 
 int main() {
-  int b = 200000;
-  int a = 199900;
-  ll ans = 0;
-  for (auto &bb : b) {
-    ans += (bb*(bb-1))/2;
-  }
+  int a = 50000;
+  long long  l = 50000;
+
+  long long ans;
+
+  ans = a*a;
+  cout << ans << endl; // -1794967296 ← overflowしてる
+  ans = (ll)a*a;
+  cout << ans << endl; // -1794967296 ← overflowしてる
+  ans = l*l;
+  cout << ans << endl; // 2500000000
 }

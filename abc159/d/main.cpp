@@ -25,10 +25,6 @@ int main() {
     ans += (bb*(bb-1))/2;
   }
 
-  cout << b[168769] << endl;
-  // cout << ans << endl;
-  
-
   rep(i,n) {
     // i番目を除いたときに、いくつ減るかを見る
     // e.g. 1=3個、 2=2個、 3=5個のとき
@@ -43,12 +39,8 @@ int main() {
       minus = 0;
     }
 
-    // cout << ans-minus << endl;
+    cout << ans-minus << endl;
   }
-
-  cout << INT_MAX << endl;
-
-  cout << "hoge" << endl;
 
   return 0;
 }

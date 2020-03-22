@@ -198,7 +198,11 @@ factorial(5) // 5! = 120
 ```
 
 ### 順列 permutation
-NaN
+```c++
+// 順列を全通り
+// perm({1,2,3}) -> (1,2,3), (1,3,2), (2,1,3), (2,3,1), (3,1,2), (3,2,1)  3x2通り
+#define perm(c) sort(all(c));for(bool c##p=1;c##p;c##p=next_permutation(all(c)))
+```
 
 ### 組み合わせ Combination
 - 組み合わせの個数 nCr を求める
