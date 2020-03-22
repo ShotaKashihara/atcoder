@@ -10,11 +10,25 @@ int main() {
 
   // long long ans;
 
+
+
+
+
   long long ans = 50000 * 50000;
   cout << ans << endl; // overflow
 
   long long ans = (long long)50000 * 50000;
   cout << ans << endl; // 2500000000
+
+
+
+
+
+
+
+
+
+  
 
   // ans = a*a;
   // cout << ans << endl; // -1794967296 ← overflowしてる
