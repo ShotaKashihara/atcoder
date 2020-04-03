@@ -10,11 +10,12 @@ using P = pair<int,int>;
 #define UNIQUE(v) v.erase( unique(v.begin(), v.end()), v.end() );
 
 int main() {
-  int a;
-  cin >> a;
-  vector<string> aa;
-  aa.resize(10);
-  cin >> aa[0];
-  cout << a << aa[0] << endl;
+  string s;
+  cin >> s;
+  if (s[2] == s[3] && s[4] == s[5]) {
+    cout << "Yes" << endl;
+  } else {
+    cout << "No" << endl;
+  }
   return 0;
 }
