@@ -1,4 +1,12 @@
-// C++ includes used for precompiling -*- C++ -*-// Copyright (C) 2003-2014 Free Software Foundation, Inc.//// This file is part of the GNU ISO C++ Library.  This library is free// software; you can redistribute it and/or modify it under the// terms of the GNU General Public License as published by the// Free Software Foundation; either version 3, or (at your option)// any later version.
+// C++ includes used for precompiling -*- C++ -*-
+
+// Copyright (C) 2003-2013 Free Software Foundation, Inc.
+//
+// This file is part of the GNU ISO C++ Library.  This library is free
+// software; you can redistribute it and/or modify it under the
+// terms of the GNU General Public License as published by the
+// Free Software Foundation; either version 3, or (at your option)
+// any later version.
 
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -44,7 +52,6 @@
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
-#include <cstdalign>
 #include <cstdbool>
 #include <cstdint>
 #include <ctgmath>
@@ -89,21 +96,21 @@
 #if __cplusplus >= 201103L
 #include <array>
 #include <atomic>
-  #include <chrono>
-  #include <condition_variable>
-  #include <forward_list>
-  #include <future>
-  #include <initializer_list>
-  #include <mutex>
-  #include <random>
-  #include <ratio>
-  #include <regex>
-  #include <scoped_allocator>
-  #include <system_error>
-  #include <thread>
-  #include <tuple>
-  #include <typeindex>
-  #include <type_traits>
-  #include <unordered_map>
-  #include <unordered_set>
+#include <chrono>
+#include <condition_variable>
+#include <forward_list>
+#include <future>
+#include <initializer_list>
+#include <mutex>
+#include <random>
+#include <ratio>
+#include <regex>
+#include <scoped_allocator>
+#include <system_error>
+#include <thread>
+#include <tuple>
+#include <type_traits>
+#include <typeindex>
+#include <unordered_map>
+#include <unordered_set>
 #endif

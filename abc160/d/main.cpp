@@ -11,7 +11,7 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
-ll a[100010];
+ll a[1000100];
 
 int main() {
   ios_base::sync_with_stdio(0);
@@ -19,25 +19,21 @@ int main() {
 
   int n, x, y;
   cin >> n >> x >> y;
+
   x--;
   y--;
 
+  // i -> j への最短経路を考える
+  // 経路のパターンは最大3つ
+  // 1. i -> j へ ショートカットを使わずに直線で移動する
+  // 2. i -> x, y -> j へショートカットを使って移動する
+  // 3. i -> y, x -> j へショートカットを使って移動する
+
   rep(i, n) {
     rep(j, i + 1, n) {
-      // 抜け道を使った場合の距離
-      // 1から5まで歩いた
       int dist = abs(i - j);
-
-      // 抜け道Xを使った場合の距離
-      // 1からx まで歩く + 1 + yから5まで歩く
-      int distx = abs(x - i) + 1 + abs(y - j);
-
-      // 抜け道Yを使った場合の距離
-      // 1からyまで歩く + 1 + xから5まで歩く
-      int disty = abs(y - i) + 1 + abs(x - j);
-
-      dist = min(dist, distx);
-      dist = min(dist, disty);
+      dist = min(dist, abs(i - x) + 1 + abs(j - y));
+      dist = min(dist, abs(i - y) + 1 + abs(j - x));
       a[dist]++;
     }
   }
