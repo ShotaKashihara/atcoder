@@ -1,46 +1,19 @@
 #include <bits/stdc++.h>
-// e.g. sort(all(a), [](int a1, int a2) { return a1 < a2; });
-#define all(a) (a).begin(),(a).end()
-#define rep(i,n) for (int i = 0; i < (n); ++i)
+#define _overload3(_1, _2, _3, name, ...) name
+#define _rep(i, n) repi(i, 0, n)
+#define repi(i, a, b) for(int i = int(a); i < int(b); ++i)
+#define rep(...) _overload3(__VA_ARGS__, repi, _rep, )(__VA_ARGS__)
+#define all(a) (a).begin(), (a).end()
 using namespace std;
 using ll = long long;
-using P = pair<int,int>;
-
-vector<int> a(200010);
-vector<ll> b(200010);
+using P = pair<int, int>;
+#define SZ(x) ((int)(x).size())
+#define bit(n) (1LL << (n))
+#define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
 int main() {
-  int n;
-  cin >> n;
-  a.resize(n);
-  rep(i,n) cin >> a[i];
-
-  // とりあえず、現状で選び出すパターン数を求める
-  // 1. 数字A が N個あるかをまとめる
-  rep(i,n){
-    b[a[i]]++;
-  }
-  ll ans = 0;
-  for (auto &bb : b) {
-    ans += (bb*(bb-1))/2;
-  }
-
-  rep(i,n) {
-    // i番目を除いたときに、いくつ減るかを見る
-    // e.g. 1=3個、 2=2個、 3=5個のとき
-    // i番目が 1 なら、 パターンが 3パターン→ 1パターン なので 2減る
-    // i番目が 2 なら、 パターンが 1パターン→ 0パターン なので 1減る
-    // i番目が 3 なら、 パターンが 10パターン→ 6パターン なので 4減る
-
-    int count = b[a[i]];
-    int new_c = count -1;
-    ll minus = ((count*(count-1)) / 2) - (new_c*(new_c-1)) / 2;
-    if (new_c == 0) {
-      minus = 0;
-    }
-
-    cout << ans-minus << endl;
-  }
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
 
   return 0;
 }

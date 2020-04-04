@@ -1,38 +1,19 @@
 #include <bits/stdc++.h>
-// e.g. sort(all(a), [](int a1, int a2) { return a1 < a2; });
-#define all(a) (a).begin(),(a).end()
-#define rep(i,n) for(int i=0, i##_len=(n); i<i##_len; ++i)
+#define _overload3(_1, _2, _3, name, ...) name
+#define _rep(i, n) repi(i, 0, n)
+#define repi(i, a, b) for(int i = int(a); i < int(b); ++i)
+#define rep(...) _overload3(__VA_ARGS__, repi, _rep, )(__VA_ARGS__)
+#define all(a) (a).begin(), (a).end()
 using namespace std;
 using ll = long long;
-using P = pair<int,int>;
+using P = pair<int, int>;
 #define SZ(x) ((int)(x).size())
-#define bit(n) (1LL<<(n))
-#define UNIQUE(v) v.erase( unique(v.begin(), v.end()), v.end() );
-
-vector<int> a(200010);
+#define bit(n) (1LL << (n))
+#define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
 int main() {
-  int k,n;
-  cin >> k >> n;
-  a.resize(n);
-  rep(i,n) cin >> a[i];
-
-  // a[0] から a[0] までぐるっと一周まわる
-  // かつ、差分が一番大きい場所をメモしておく
-
-  int sum = 0;
-  int max_diff = 0;
-  rep(i,n) {
-    if (i == 0) {
-      sum += k + a[0] - a[n-1];
-      max_diff = max(k + a[0] - a[n-1], max_diff);
-    } else {
-      sum += a[i] - a[i-1];
-      max_diff = max(a[i] - a[i-1], max_diff);
-    }
-  }
-
-  cout << sum - max_diff << endl;
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
 
   return 0;
 }

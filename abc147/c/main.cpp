@@ -1,45 +1,19 @@
 #include <bits/stdc++.h>
-// e.g. sort(all(a), [](int a1, int a2) { return a1 < a2; });
-#define all(a) (a).begin(),(a).end()
-#define rep(i,n) for (int i = 0; i < (n); ++i)
+#define _overload3(_1, _2, _3, name, ...) name
+#define _rep(i, n) repi(i, 0, n)
+#define repi(i, a, b) for(int i = int(a); i < int(b); ++i)
+#define rep(...) _overload3(__VA_ARGS__, repi, _rep, )(__VA_ARGS__)
+#define all(a) (a).begin(), (a).end()
 using namespace std;
 using ll = long long;
-using P = pair<int,int>;
-
-vector<vector<pair<int, int>>> v;
+using P = pair<int, int>;
+#define SZ(x) ((int)(x).size())
+#define bit(n) (1LL << (n))
+#define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
 int main() {
-  int n;
-  cin >> n;
-  v.resize(n);
-  rep(i,n) {
-    int a;
-    cin >> a;
-    v[i].resize(a);
-    rep(j,a) {
-      int x,y;
-      cin >> x >> y;
-      v[i][j] = P(x,y);
-    }
-  }
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
 
-  int ans = n+1;
-  rep(i, 1<<n) {
-    bool ok = true;
-  
-    for (auto p: v[i]) {
-      // iさんの発言がどれか偽なら、この検証は不要とする
-
-      if (i & 1 << p.first ^ p.second) {
-        ok = false;
-      }
-    }
-
-    if (ok) {
-      min(ans, counter(i));
-    }
-  }
-
-  cout << v[0][0].first << endl;
   return 0;
 }

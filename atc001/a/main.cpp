@@ -29,23 +29,27 @@ void dfs(int h, int w) {
 }
 
 int main() {
-  int h,w;
-  cin >> h >> w; // (w,h) 
-  P s,g; // スタート地点, ゴール地点
-  rep(_h,h) {
-    string line; // "s..###" みたいな文字列
-    cin >> line;
-    rep(_w,w) {
-      if (line[_w] != '#') a.at(_h).at(_w) = Nothing; // 通れる道をマーキング
-      if (line[_w] == 's') s = P(_h,_w); // スタート地点
-      if (line[_w] == 'g') g = P(_h,_w); // ゴール地点
-    }
+  // int h,w;
+  // cin >> h >> w; // (w,h) 
+  // P s,g; // スタート地点, ゴール地点
+  // rep(_h,h) {
+  //   string line; // "s..###" みたいな文字列
+  //   cin >> line;
+  //   rep(_w,w) {
+  //     if (line[_w] != '#') a.at(_h).at(_w) = Nothing; // 通れる道をマーキング
+  //     if (line[_w] == 's') s = P(_h,_w); // スタート地点
+  //     if (line[_w] == 'g') g = P(_h,_w); // ゴール地点
+  //   }
+  // }
+
+  // dfs(s.first, s.second);
+
+  // if (a.at(g.first).at(g.second) == Fill) cout << "Yes" << endl; // ゴール地点が "Fill" なら Yes
+  // else cout << "No" << endl;
+
+  rep(i, 1, 161) {
+    cout << "acc new abc" << setw(3) << setfill('0') << i << endl;
   }
-
-  dfs(s.first, s.second);
-
-  if (a.at(g.first).at(g.second) == Fill) cout << "Yes" << endl; // ゴール地点が "Fill" なら Yes
-  else cout << "No" << endl;
 
   return 0;
 }
