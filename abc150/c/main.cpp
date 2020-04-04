@@ -11,9 +11,30 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
+vector<int> p(100100); // 1e5
+vector<int> q(100100); // 1e5
+
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  int n;
+  cin >> n;
+
+  p.resize(n);
+  q.resize(n);
+  rep(i,n) cin >> p[i];
+  rep(i,n) cin >> q[i];
+
+  vector<int> a(n); // {}
+  iota(all(a), 1); // {1,2,3}
+  int count, ansq, ansp;
+  do { 
+    count++;
+    if (a == p) ansp = count;
+    if (a == q) ansq = count;
+  } while (next_permutation(all(a)));
+
+  cout << abs(ansp - ansq) << endl;
   return 0;
 }

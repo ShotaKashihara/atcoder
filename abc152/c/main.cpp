@@ -11,9 +11,27 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
+vector<int> p(100100); // 1e5
+
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
+
+  int n;
+  cin >> n;
+  p.resize(n);
+  rep(i,n) cin >> p[i];
+
+  int ans = 0;
+  int min = p[0];
+  rep(i, n) {
+    if (min >= p[i]) {
+      ans++;
+      min = p[i];
+    }
+  }
+
+  cout << ans << endl;
 
   return 0;
 }

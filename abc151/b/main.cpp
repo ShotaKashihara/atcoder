@@ -11,9 +11,28 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
+vector<int> a(100100); // 1e5
+
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
+
+  int n,k,m;
+  cin >> n >> k >> m;
+
+  a.resize(n-1);
+
+  rep(i,n-1) cin >> a[i];
+
+  int ans = m*n - accumulate(all(a), 0);
+  if (0 <= ans && ans <= k) {
+    cout << ans << endl;
+  } else if (ans < 0) {
+    cout << 0 << endl;
+  } else {
+    cout << "-1" << endl;
+  }
+
 
   return 0;
 }

@@ -11,9 +11,41 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
+vector<int> ac(100100); // 1e5
+vector<int> wa(100100); // 1e5
+
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
+
+  int n,m;
+  cin >> n >> m;
+
+  ac.resize(n);
+  wa.resize(n);
+
+  rep(i,m) {
+    int p;
+    string s;
+    cin >> p >> s;
+    p--;
+    if (ac.at(p) == 0) {
+      if (s == "AC") {
+        ac.at(p) += 1;
+      }
+      if (s == "WA") {
+        wa.at(p) += 1;
+      }
+    }
+  }
+
+  int wan = 0;
+  rep(i, n) {
+    if (ac.at(i) == 1) {
+      wan += wa.at(i);
+    }
+  }
+  cout << accumulate(all(ac), 0) << " " << wan << endl;
 
   return 0;
 }

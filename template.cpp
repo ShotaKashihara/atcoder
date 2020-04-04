@@ -11,6 +11,8 @@ using P = pair<int, int>;
 #define bit(n) (1LL << (n))
 #define UNIQUE(v) v.erase(unique(v.begin(), v.end()), v.end());
 
+vector<int> a(100100); // 1e5
+
 int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);

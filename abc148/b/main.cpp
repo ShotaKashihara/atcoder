@@ -15,5 +15,17 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  int n;
+  cin >> n;
+
+  string s,t;
+  cin >> s >> t;
+
+  rep(i,n) {
+    cout << s[i];
+    cout << t[i];
+  }
+  cout << endl;
+
   return 0;
 }

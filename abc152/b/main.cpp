@@ -15,5 +15,19 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  int a,b;
+  cin >> a >> b;
+
+  string aa, bb = "";
+
+  rep(i,b) aa += to_string(a);
+  rep(i,a) bb += to_string(b);
+
+  if (aa > bb) {
+    cout << bb << endl;
+  } else {
+    cout << aa << endl;
+  }
+
   return 0;
 }

@@ -15,5 +15,12 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  char c;
+  cin >> c;
+
+  c+=1;
+
+  cout << c << endl;
+
   return 0;
 }
