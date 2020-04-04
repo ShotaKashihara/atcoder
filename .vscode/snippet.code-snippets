@@ -14,6 +14,14 @@
 		],
 		"description": "vector<int> a(100100)"
 	},
+	"vvint": {
+		"scope": "cpp",
+		"prefix": "vvint",
+		"body": [
+			"vector<vector<int>> ${0:a}(100100, vector<int>(100100));"
+		],
+		"description": "vector<vector<int>> a(100100, vector<int>(100100))"
+	},
 	"dptemplate": {
 		"scope": "cpp",
 		"prefix": "dptemplate",
@@ -25,5 +33,50 @@
 			"ll dp[MAX_ITEM] = {0};",
 		],
 		"description": "template for DP"
+	},
+	"深さ優先探索": {
+		"scope": "cpp",
+		"prefix": "dfstemplate",
+		"body": [
+			"// ATC001A: https://atcoder.jp/contests/atc001/tasks/dfs_a",
+			"// 迷路フィールド",
+			"vector<vector<int>> a(510, vector<int>(510));",
+			"",
+			"int dw[4] = { 1, 0, -1, 0 };",
+			"int dh[4] = { 0, 1, 0, -1 };",
+			"enum { Barrier, Nothing, Fill, Start, Goal, Failure = 100 };",
+			"void dfs(int h, int w) {",
+			"\tif (h < 0 || w < 0) return;",
+			"\tif (a.at(h).at(w) == Barrier) return; // (w,h) が壁",
+			"\tif (a.at(h).at(w) == Fill) return; // (w,h) は到達済み",
+			"",
+			"\ta.at(h).at(w) = Fill; // 到達",
+			"",
+			"\trep(i, 4) dfs(h + dh[i], w + dw[i]); // 4方向を試す",
+			"}",
+			"",
+			"int main() {",
+			"\tint h,w;",
+			"\tcin >> h >> w; // (w,h) ",
+			"\tP s,g; // スタート地点, ゴール地点",
+			"\trep(_h,h) {",
+			"\t\tstring line; // \"s..###\" みたいな文字列",
+			"\t\tcin >> line;",
+			"\t\trep(_w,w) {",
+			"\t\t\tif (line[_w] != '#') a.at(_h).at(_w) = Nothing; // 通れる道をマーキング",
+			"\t\t\tif (line[_w] == 's') s = P(_h,_w); // スタート地点",
+			"\t\t\tif (line[_w] == 'g') g = P(_h,_w); // ゴール地点",
+			"\t\t}",
+			"\t}",
+			"",
+			"\tdfs(s.first, s.second);",
+			"",
+			"\tif (a.at(g.first).at(g.second) == Fill) cout << \"Yes\" << endl; // ゴール地点が \"Fill\" なら Yes",
+			"\telse cout << \"No\" << endl;",
+			"",
+			"\treturn 0;",
+			"}",
+		],
+		"description": "template for 深さ優先探索"
 	}
 }
