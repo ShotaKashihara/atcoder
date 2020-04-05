@@ -15,5 +15,19 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  int n;
+  string s;
+  cin >> n >> s;
+
+  rep(i,SZ(s)) {
+    if (s[i]+n > 'Z') {
+      s[i] = s[i]+n-'Z'+'A'-1;
+    } else {
+      s[i] = s[i]+n;
+    }
+  }
+
+  cout << s << endl;
+
   return 0;
 }

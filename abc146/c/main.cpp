@@ -15,5 +15,8 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
+  ll a,b,x;
+  cin >> a >> b >> x;
+
   return 0;
 }
