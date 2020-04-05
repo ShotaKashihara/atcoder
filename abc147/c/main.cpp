@@ -13,16 +13,8 @@ using P = pair<int, int>;
 
 vector<vector<P>> v(15, vector<P>(15));
 
-vector<vector<bool>> bit_full_search(int N) {
-  vector<vector<bool>> res;
-  res.resize(1<<N);
-  for (int bit = 0; bit < (1<<N); bit++) {
-    rep(i,N) {
-      res.at(bit).push_back((bit & 1<<i));
-    }
-  }
-  return res;
-}
+// N=3 -> {{0,0,0}, {0,0,1}, {0,1,0}, ... }
+vector<vector<bool>> bit_full_search(int N) { vector<vector<bool>> res; res.resize(1<<N); for (int bit = 0; bit < (1<<N); bit++) { rep(i,N) { res.at(bit).push_back((bit & 1<<i)); } } return res; }
 
 int main() {
   // ios_base::sync_with_stdio(0);
