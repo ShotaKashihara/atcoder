@@ -9,6 +9,17 @@
             "args": [],
             "cwd": "${fileDirname}/",
             "preLaunchTask": "clang++ build active file",
-        }
-    ]
+        },
+        {
+            "name": "(LLDB) Debug > input.txt",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}/",
+            "preLaunchTask": "clang++ build active file",
+            "terminal": "integrated",
+            "stdio": "${fileDirname}/input.txt"
+        },
+    ],
 }
