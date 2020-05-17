@@ -15,10 +15,11 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
-  ll a,b,x;
-  cin >> a >> b >> x;
-
-  
+  ll n,k;
+  cin >> n >> k;
+  n = n % k;
+  ll ans = min(abs(n - k), n);
+  cout << ans << endl;
 
   return 0;
 }

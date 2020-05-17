@@ -15,10 +15,28 @@ int main() {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 
-  ll a,b,x;
-  cin >> a >> b >> x;
+  double n,m;
+  cin >> n >> m;
 
+  vector<int> a(n);
+  double sum = 0;
+  rep(i,n) {
+    int aa;
+    cin >> aa;
+    sum += aa;
+    a[i] = aa;
+  }
+
+  sum = sum / 4 / m;
   
+  int ans = 0;
+  rep(i,n) {
+    if (a[i] >= sum) {
+      ans++;
+    }
+  }
+
+  cout << ((ans >= m) ? "Yes" : "No") << endl;
 
   return 0;
 }
